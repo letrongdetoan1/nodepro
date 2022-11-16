@@ -1,14 +1,20 @@
 const express = require('express');
 const createError = require('http-errors');
+const { userRouter } = require('./Routes/User.router');
 const app = express();
 
 require('dotenv').config();
-require('./helpels/connections_mutil_mongodb');
+require('./helpels/connections_mongodb');
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 
 app.get('/', (req, res, next) => {
-    console.log(a);
-    res.send('ok')
+    res.send('ok');
 })
+
+app.use('/user', userRouter);
 
 app.use((req, res, next) => {
     next(createError.NotFound('This route does not exist'));
@@ -23,7 +29,7 @@ app.use((err, req, res, next) => {
 })
 
 
-const post = process.env.PORT || 5000 ;
+const post = process.env.PORT || 5000;
 app.listen(post, () => {
     console.log('http://localhost:3000/');
 })

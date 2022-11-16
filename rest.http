@@ -1,4 +1,19 @@
 GET http://localhost:3000/
 
 ###
-GET http://localhost:3000/abc
+POST http://localhost:3000/user/register
+Content-Type: application/json
+
+{
+    "email": "letrongdet1oan31235@gmail.com",
+    "password": "abc123"
+}
+
+###
+POST http://localhost:3000/user/login
+Content-Type: application/json
+
+{
+    "email": "letrongdet1oan31235@gmail.com",
+    "password": "abc1123"
+}
