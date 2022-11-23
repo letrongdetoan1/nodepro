@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
-const { testConnection, useConnection } = require('../helpels/connections_mutil_mongodb');
 const schema = mongoose.Schema;
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+
+const { testConnection, useConnection } = require('../helpels/connections_mutil_mongodb');
+
 const UserSchema = new schema({
     email: {
         type: String,
