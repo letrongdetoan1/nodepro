@@ -17,3 +17,7 @@ Content-Type: application/json
     "email": "letrongdet1oan31235@gmail.com",
     "password": "abc123"
 }
+
+###
+GET http://localhost:3000/user/list
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mzc0NjcxN2M3YTRmZjk1YmVlZGVkMTciLCJpYXQiOjE2NjkyNjkwNzgsImV4cCI6MTY2OTI3MjY3OH0.UkV5NHh8Zu71ZjMszXbCbAKkuW-aM70azIlSR0Z4iWE

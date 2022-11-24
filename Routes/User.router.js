@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const createError = require('http-errors');
 
-const { signAccessToken } = require('../helpels/jwt.service');
+const { signAccessToken, verifyToken } = require('../helpels/jwt.service');
 const { validateUser } = require('../helpels/valiadateRegister');
 const UserModel = require('../Models/User.model');
 
@@ -52,17 +52,20 @@ router.post('/login', async (req, res, next) => {
             throw (createError.Unauthorized())
         }
 
-        const accessToken = await signAccessToken(user._id); 
+        const accessToken = await signAccessToken(user._id);
         res.send({
             accessToken
         })
-        
+
     }
     catch (error) {
         next(error)
     }
 })
 
+router.get('/list', verifyToken, (req, res, next) => {
+    res.send('get list')
+})
 module.exports = {
     userRouter: router
 }

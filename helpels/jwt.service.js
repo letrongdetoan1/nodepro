@@ -1,4 +1,5 @@
 const JWT = require('jsonwebtoken');
+const createError = require('http-errors');
 
 const signAccessToken = async (userId) => {
     return new Promise((resolve, reject) => {
@@ -16,6 +17,24 @@ const signAccessToken = async (userId) => {
     })
 }
 
+const verifyToken = (req, res, next) => {
+    if (!req.headers['authorization']) {
+        return next(createError.Unauthorized());
+    }
+    const authHeader = req.headers['authorization'];
+    const bearerTolen = authHeader.split(' ');
+    const token = bearerTolen[1];
+
+    JWT.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, payload) => {
+        if (err) {
+            return next(createError.Unauthorized());
+        }
+        req.playload = payload;
+        next();
+    })
+}
+
 module.exports = {
-    signAccessToken
+    signAccessToken,
+    verifyToken
 }
