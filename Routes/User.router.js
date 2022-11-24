@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const createError = require('http-errors');
 
-const { signAccessToken, verifyToken } = require('../helpels/jwt.service');
+const { signAccessToken, verifyToken, signRefreshToken } = require('../helpels/jwt.service');
 const { validateUser } = require('../helpels/valiadateRegister');
 const UserModel = require('../Models/User.model');
 
@@ -53,8 +53,10 @@ router.post('/login', async (req, res, next) => {
         }
 
         const accessToken = await signAccessToken(user._id);
+        const refreshToken = await signRefreshToken(user._id);
         res.send({
-            accessToken
+            accessToken,
+            refreshToken
         })
 
     }

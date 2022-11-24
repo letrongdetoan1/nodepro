@@ -34,7 +34,24 @@ const verifyToken = (req, res, next) => {
     })
 }
 
+const signRefreshToken = async (userId) => {
+    return new Promise((resolve, reject) => {
+        const playload = {
+            userId
+        }
+        const secret = process.env.REFRESH_TOKEN_SECRET
+        const options = {
+            expiresIn: '1y'
+        }
+        JWT.sign(playload, secret, options, (err, data) => {
+            if (err) reject(err);
+            resolve(data);
+        })
+    })
+}
+
 module.exports = {
     signAccessToken,
-    verifyToken
+    verifyToken,
+    signRefreshToken
 }

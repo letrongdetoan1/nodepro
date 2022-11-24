@@ -1,5 +1,6 @@
 const express = require('express');
 const createError = require('http-errors');
+const client  = require('./helpels/connections_redis');
 const { userRouter } = require('./Routes/User.router');
 const app = express();
 
